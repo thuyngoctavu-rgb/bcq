@@ -44,6 +44,16 @@ tr.tot td{font-weight:600;border-top:2px solid var(--line)}
 .ins ul{margin:0;padding-left:18px}
 .tag{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;background:var(--line)}
 .note{font-size:12px;color:var(--mute);margin-top:28px}
+
+:root{--sa:#2f6fb5;--sb:#8a55c2}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--sa:#6aa6e6;--sb:#b794e6}}
+:root[data-theme="dark"]{--sa:#6aa6e6;--sb:#b794e6}
+.sa{--c:var(--sa)}.sb{--c:var(--sb)}
+.sh{display:flex;align-items:center;gap:8px;font-weight:600;margin:18px 0 8px}
+.sh i,.lg i{display:inline-block;width:12px;height:12px;border-radius:3px;background:var(--c)}
+.sys td:first-child{border-left:4px solid var(--c)}
+.sys .tag{background:color-mix(in srgb,var(--c) 18%,transparent)}
+.lg p{margin:0 0 14px}.lg p:last-child{margin:0}
 </style>
 </head>
 <body>
@@ -110,10 +120,41 @@ tr.tot td{font-weight:600;border-top:2px solid var(--line)}
 <h2>Hỗ trợ phần mềm</h2>
 <div class="grid g4">
  <div class="card k"><span>Tổng sự cố</span><b>10</b><span>Đã hoàn thành 10/10</span></div>
- <div class="card k"><span>CRM Viet &amp; Etelecom</span><b>6</b><span>Định danh nhà mạng, nhạc chờ, gia hạn SSL và phần mềm</span></div>
- <div class="card k"><span>SMAX</span><b>4</b><span>Tin nhắn đổ về chậm (2 lần), lỗi phần mềm, gia hạn</span></div>
+ <div class="card k" style="border-top:4px solid var(--sa)"><span>CRM Viet &amp; Etelecom</span><b>6</b><span>Định danh nhà mạng, nhạc chờ, gia hạn SSL và phần mềm</span></div>
+ <div class="card k" style="border-top:4px solid var(--sb)"><span>SMAX</span><b>4</b><span>Tin nhắn đổ về chậm (2 lần), lỗi phần mềm, gia hạn</span></div>
  <div class="card k"><span>CSKH + Autochannel</span><b>283 tr</b><span>Bằng 46,3% mục tiêu 611 tr. Tổng cả hai nhóm: 2,182 tỷ (59,9% kế hoạch)</span></div>
 </div>
+
+<h2>Chi tiết từng sự cố phần mềm</h2>
+<p class="sub">Chia theo hai hệ thống, mỗi hệ thống một màu. Cả 10 sự cố đã hoàn thành.</p>
+<div class="grid g2">
+ <div class="card"><div class="ch" style="height:220px"><canvas id="c8"></canvas></div></div>
+ <div class="card lg">
+  <p class="sa"><i></i> <b>CRM Viet &amp; Etelecom: 6 sự cố</b><br><span class="sub">4 việc về nhà mạng và cấu hình, 2 lần gia hạn.</span></p>
+  <p class="sb"><i></i> <b>SMAX: 4 sự cố</b><br><span class="sub">3 sự cố kỹ thuật (tin nhắn chậm 2 lần, lỗi phần mềm), 1 lần gia hạn.</span></p>
+ </div>
+</div>
+<div class="sys sa"><div class="sh"><i></i>CRM Viet &amp; Etelecom · 6 sự cố</div><div class="card tw"><table>
+<tr><th>Ngày</th><th>Tháng</th><th style="text-align:left">Nội dung ghi nhận</th><th style="text-align:left">Phân loại</th><th style="text-align:left">Tình trạng</th></tr>
+<tr><td>16/07/2026</td><td>T7</td><td style="text-align:left">Định danh nhà mạng Vina</td><td style="text-align:left"><span class="tag">Nhà mạng / cấu hình</span></td><td style="text-align:left" class="pos">Hoàn thành</td></tr>
+<tr><td>04/08/2026</td><td>T8</td><td style="text-align:left">Đổi nhạc chờ</td><td style="text-align:left"><span class="tag">Nhà mạng / cấu hình</span></td><td style="text-align:left" class="pos">Hoàn thành</td></tr>
+<tr><td>20/08/2026</td><td>T8</td><td style="text-align:left">Điều chỉnh thời gian nhạc chờ</td><td style="text-align:left"><span class="tag">Nhà mạng / cấu hình</span></td><td style="text-align:left" class="pos">Hoàn thành</td></tr>
+<tr><td>20/08/2026</td><td>T8</td><td style="text-align:left">Làm sim Viettel và định danh</td><td style="text-align:left"><span class="tag">Nhà mạng / cấu hình</span></td><td style="text-align:left" class="pos">Hoàn thành</td></tr>
+<tr><td>03/09/2026</td><td>T9</td><td style="text-align:left">Gia hạn phần mềm Etelecom</td><td style="text-align:left"><span class="tag">Gia hạn</span></td><td style="text-align:left" class="pos">Hoàn thành</td></tr>
+<tr><td>30/09/2026</td><td>T9</td><td style="text-align:left">Gia hạn SSL của CRM Viet</td><td style="text-align:left"><span class="tag">Gia hạn</span></td><td style="text-align:left" class="pos">Hoàn thành</td></tr>
+</table></div></div>
+<div class="sys sb"><div class="sh"><i></i>SMAX · 4 sự cố</div><div class="card tw"><table>
+<tr><th>Ngày</th><th>Tháng</th><th style="text-align:left">Nội dung ghi nhận</th><th style="text-align:left">Phân loại</th><th style="text-align:left">Tình trạng</th></tr>
+<tr><td>13/07/2026</td><td>T7</td><td style="text-align:left">Tin nhắn bị đổ về chậm</td><td style="text-align:left"><span class="tag">Sự cố kỹ thuật</span></td><td style="text-align:left" class="pos">Hoàn thành</td></tr>
+<tr><td>18/08/2026</td><td>T8</td><td style="text-align:left">Tin nhắn bị đổ về chậm (lần 2)</td><td style="text-align:left"><span class="tag">Sự cố kỹ thuật</span></td><td style="text-align:left" class="pos">Hoàn thành</td></tr>
+<tr><td>29/08/2026</td><td>T8</td><td style="text-align:left">Phần mềm bị lỗi</td><td style="text-align:left"><span class="tag">Sự cố kỹ thuật</span></td><td style="text-align:left" class="pos">Hoàn thành</td></tr>
+<tr><td>28/09/2026</td><td>T9</td><td style="text-align:left">Gia hạn phần mềm</td><td style="text-align:left"><span class="tag">Gia hạn</span></td><td style="text-align:left" class="pos">Hoàn thành</td></tr>
+</table></div></div>
+<div class="card ins" style="margin-top:12px"><ul>
+<li><b>Theo loại:</b> 3 sự cố kỹ thuật (đều ở SMAX), 4 việc về nhà mạng và cấu hình (đều ở CRM Viet &amp; Etelecom), 3 lần gia hạn phần mềm.</li>
+<li><b>Cần theo dõi:</b> SMAX báo tin nhắn đổ về chậm 2 tháng liên tiếp (13/07 và 18/08), sau đó lỗi phần mềm ngày 29/08. Nên hỏi nhà cung cấp nguyên nhân gốc để tránh lặp lại.</li>
+<li><b>Gia hạn cuối tháng 9:</b> gia hạn SMAX (28/09) và SSL CRM Viet (30/09) đều làm sát hạn, nên đặt nhắc việc trước 2 tuần cho kỳ sau.</li>
+</ul></div>
 
 <p class="note">Nguồn: file “Báo cáo kết quả doanh thu và giờ làm việc 2026 – Quý III”. So sánh cùng kỳ năm trước dùng số liệu theo kênh (2,936 tỷ). Mục 1 của file gốc ghi Quý III.2025 là 3,282 tỷ nên tăng trưởng cùng kỳ ở đó là −42,1%, còn dashboard này là −35,3%. Nên đối chiếu lại số gốc. Quý III.2025 có 5 nhân sự (một người nghỉ), nên so doanh thu/giờ công bằng hơn so doanh thu từng người. Bảng nhân sự Quý II trong file gốc ghi nhãn tháng chưa thống nhất, dashboard dùng tổng quý.</p>
 </div>
@@ -203,6 +244,10 @@ function draw(){
   {label:"Do giá trị đơn",data:br.map(b=>b[2]),backgroundColor:g("--green")},
   {label:"Tổng chênh lệch",data:br.map(b=>b[3]),backgroundColor:g("--mute")}]},
   options:{...base,scales:sc({y:{beginAtZero:false}}),plugins:{...base.plugins,title:{display:true,text:"Chênh lệch doanh thu: do số đơn hay giá trị đơn (triệu đồng)",color:ink},tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${dl(c.raw)} triệu`}}}}});
+ mk("c8",{type:"bar",data:{labels:mo,datasets:[
+  {label:"CRM Viet & Etelecom",data:[1,3,2],backgroundColor:g("--sa")},
+  {label:"SMAX",data:[1,2,1],backgroundColor:g("--sb")}]},
+  options:{...base,scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:{color:ln},beginAtZero:true,ticks:{stepSize:1}}},plugins:{...base.plugins,title:{display:true,text:"Số sự cố theo tháng và hệ thống",color:ink}}}});
 }
 draw();
 matchMedia("(prefers-color-scheme:dark)").addEventListener("change",draw);
