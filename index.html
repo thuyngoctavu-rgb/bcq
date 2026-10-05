@@ -79,6 +79,8 @@ tr.tot td{font-weight:600;border-top:2px solid var(--line)}
 <p class="sub">So với kế hoạch, Quý II.2026 và cùng kỳ Quý III.2025. Số âm là thấp hơn mốc so sánh. Tháng Quý II tính theo thứ tự T4, T5, T6 tương ứng T7, T8, T9.</p>
 <div class="card tw"><table id="tv"></table></div>
 <div class="card tw" style="margin-top:12px"><table id="tm"></table></div>
+<p class="sub" style="margin-top:16px">Nhóm CSKH + Autochannel và tổng hai nhóm (cả quý, triệu đồng)</p>
+<div class="card tw"><table id="tg"></table></div>
 <div class="grid g2" style="margin-top:12px">
  <div class="card"><div class="ch"><canvas id="c6"></canvas></div></div>
  <div class="card"><div class="ch"><canvas id="c7"></canvas></div></div>
@@ -120,7 +122,7 @@ tr.tot td{font-weight:600;border-top:2px solid var(--line)}
  <div class="card k"><span>Tổng sự cố</span><b>10</b><span>Đã hoàn thành 10/10</span></div>
  <div class="card k" style="border-top:4px solid var(--sa)"><span>CRM Viet &amp; Etelecom</span><b>6</b><span>Định danh nhà mạng, nhạc chờ, gia hạn SSL và phần mềm</span></div>
  <div class="card k" style="border-top:4px solid var(--sb)"><span>SMAX</span><b>4</b><span>Tin nhắn đổ về chậm (2 lần), lỗi phần mềm, gia hạn</span></div>
- <div class="card k"><span>CSKH + Autochannel</span><b>283 tr</b><span>Bằng 46,3% mục tiêu 611 tr. Tổng cả hai nhóm: 2,182 tỷ (59,9% kế hoạch)</span></div>
+ <div class="card k"><span>CSKH + Autochannel</span><b>283 tr</b><span>Bằng 46,3% mục tiêu 611 tr, giảm 16,5% so với Quý II và 40,8% so với Q3.2025. Tổng hai nhóm: 2,182 tỷ (59,9% kế hoạch)</span></div>
 </div>
 
 <h2>Chi tiết từng sự cố phần mềm</h2>
@@ -154,7 +156,7 @@ tr.tot td{font-weight:600;border-top:2px solid var(--line)}
 <li><b>Gia hạn cuối tháng 9:</b> gia hạn SMAX (28/09) và SSL CRM Viet (30/09) đều làm sát hạn, nên đặt nhắc việc trước 2 tuần cho kỳ sau.</li>
 </ul></div>
 
-<p class="note">Nguồn: file “Báo cáo kết quả doanh thu và giờ làm việc 2026 – Quý III”. So sánh cùng kỳ năm trước dùng số liệu theo kênh (2,936 tỷ). Mục 1 của file gốc ghi Quý III.2025 là 3,282 tỷ nên tăng trưởng cùng kỳ ở đó là −42,1%, còn dashboard này là −35,3%. Nên đối chiếu lại số gốc. Quý III.2025 có 5 nhân sự (một người nghỉ), nên so doanh thu/giờ công bằng hơn so doanh thu từng người. Bảng nhân sự Quý II trong file gốc ghi nhãn tháng chưa thống nhất, dashboard dùng tổng quý.</p>
+<p class="note">Nguồn: file “Báo cáo kết quả doanh thu và giờ làm việc 2026 – Quý III”. Số liệu Quý III.2025 và Quý II.2026 đã cập nhật theo file báo cáo điều chỉnh mới nhất. Quý III.2025 có 5 nhân sự (một người nghỉ), nên so doanh thu/giờ công bằng hơn so doanh thu từng người. Bảng nhân sự Quý II trong file gốc ghi nhãn tháng chưa thống nhất, dashboard dùng tổng quý.</p>
 </div>
 
 <script>
@@ -201,6 +203,10 @@ const mr=mo.map((m,i)=>[m,act[i],plan[i],q2[i],y25[i]]);mr.push(["Cả quý",sum
 h=`<tr><th>Doanh thu (triệu)</th><th>Thực tế</th><th>Kế hoạch</th><th>Chênh</th><th>%</th><th>Quý II</th><th>Chênh</th><th>%</th><th>Q3.2025</th><th>Chênh</th><th>%</th></tr>`;
 mr.forEach(r=>{h+=`<tr class="${r[0]=="Cả quý"?"tot":""}"><td>${r[0]}</td><td>${f(Math.round(r[1]))}</td>${cell(r[1],r[2])}${cell(r[1],r[3])}${cell(r[1],r[4])}</tr>`});
 document.getElementById("tm").innerHTML=h;
+const gr=[["Kênh nhận đơn (3 kênh)",1899.008,3034.444,2705.604,2936.08],["CSKH + Autochannel",282.998,611.34,338.89,477.937],["Tổng hai nhóm",2182.006,3645.784,3044.494,3414.017]];
+h=`<tr><th>Nhóm</th><th>Thực tế</th><th>Kế hoạch</th><th>Chênh</th><th>%</th><th>Quý II</th><th>Chênh</th><th>%</th><th>Q3.2025</th><th>Chênh</th><th>%</th></tr>`;
+gr.forEach((r,i)=>{h+=`<tr class="${i==2?"tot":""}"><td>${r[0]}</td><td>${f(Math.round(r[1]))}</td>${cell(r[1],r[2])}${cell(r[1],r[3])}${cell(r[1],r[4])}</tr>`});
+document.getElementById("tg").innerHTML=h;
 const sv=[["Hà Văn Thái",407.34,576.124,600.877,606161,852886,973869],["Tài Châu Thúy Ngọc",579.897,818.441,735.599,846565,1058101,1172269],["Nguyễn Ngọc Trinh",496.762,688.675,609.998,761321,1024814,1048107],["Nguyễn Huỳnh Lan Anh",415.009,622.364,598.991,658222,933079,1012664]];
 h=`<tr><th>Nhân sự</th><th>Doanh thu (tr)</th><th>So Quý II</th><th>So Q3.2025</th><th>Doanh thu/giờ</th><th>So Quý II</th><th>So Q3.2025</th><th>So mục tiêu</th></tr>`;
 sv.forEach(s=>{h+=`<tr><td>${s[0]}</td><td>${f(Math.round(s[1]))}</td><td>${sg(pc(s[1],s[2]))}</td><td>${sg(pc(s[1],s[3]))}</td><td>${f(s[4])}đ</td><td>${sg(pc(s[4],s[5]))}</td><td>${sg(pc(s[4],s[6]))}</td><td>${sg(pc(s[4],1050000))}</td></tr>`});
