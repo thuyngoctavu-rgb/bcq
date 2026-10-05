@@ -54,6 +54,10 @@ tr.tot td{font-weight:600;border-top:2px solid var(--line)}
 .sys td:first-child{border-left:4px solid var(--c)}
 .sys .tag{background:color-mix(in srgb,var(--c) 18%,transparent)}
 .lg p{margin:0 0 14px}.lg p:last-child{margin:0}
+html{scroll-padding-top:56px}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;gap:6px;overflow-x:auto;padding:8px 0;margin-top:10px;border-bottom:1px solid var(--line)}
+.nav a{padding:5px 12px;border-radius:16px;font-size:13px;color:var(--ink);text-decoration:none;background:var(--card);border:1px solid var(--line);white-space:nowrap}
+h3{font-size:14px;margin:18px 0 6px;font-weight:600;color:var(--mute)}
 </style>
 </head>
 <body>
@@ -61,6 +65,7 @@ tr.tot td{font-weight:600;border-top:2px solid var(--line)}
 <h1>Báo cáo CSKH Online – Quý III.2026</h1>
 <p class="sub">Kênh nhận đơn: Zalo phòng, Fanpage, Hotline · Kỳ báo cáo 01/07 – 30/09/2026</p>
 
+<nav class="nav"><a href="#kpi">Tổng quan</a><a href="#dt">Doanh thu</a><a href="#cl">Chênh lệch</a><a href="#kn">Kênh nhận đơn</a><a href="#ns">Nhân sự</a><a href="#pm">Phần mềm</a></nav>
 <section class="hero">
  <div>
   <div class="big">62,6%</div>
@@ -70,12 +75,15 @@ tr.tot td{font-weight:600;border-top:2px solid var(--line)}
 </section>
 
 <div class="grid g4" style="margin-top:12px" id="kpi"></div>
+<h2>Chi tiết vận hành theo tháng</h2>
+<p class="sub">Đơn/ngày và doanh thu/ngày tính theo số ngày của tháng (31, 31, 30 ngày).</p>
+<div class="card tw"><table id="tmo"></table></div>
 
-<h2>Doanh thu theo tháng</h2>
+<h2 id="dt">Doanh thu theo tháng</h2>
 <p class="sub">Triệu đồng. Tháng 9 chỉ đạt một nửa kế hoạch.</p>
 <div class="card"><div class="ch"><canvas id="c1"></canvas></div></div>
 
-<h2>Phân tích chênh lệch</h2>
+<h2 id="cl">Phân tích chênh lệch</h2>
 <p class="sub">So với kế hoạch, Quý II.2026 và cùng kỳ Quý III.2025. Số âm là thấp hơn mốc so sánh. Tháng Quý II tính theo thứ tự T4, T5, T6 tương ứng T7, T8, T9.</p>
 <div class="card tw"><table id="tv"></table></div>
 <div class="card tw" style="margin-top:12px"><table id="tm"></table></div>
@@ -94,21 +102,26 @@ tr.tot td{font-weight:600;border-top:2px solid var(--line)}
 <li><b>Nhân sự:</b> Châu Thúy Ngọc giữ hiệu suất tốt nhất (doanh thu/giờ giảm 20,0% so với Quý II). Hà Văn Thái Tài và Nguyễn Huỳnh Lan Anh giảm gần 30%.</li>
 </ul></div>
 
-<h2>Theo kênh nhận đơn</h2>
+<h2 id="kn">Theo kênh nhận đơn</h2>
 <p class="sub">Số đơn từng tháng và đóng góp doanh thu của mỗi kênh.</p>
 <div class="grid g2">
  <div class="card"><div class="ch"><canvas id="c2"></canvas></div></div>
  <div class="card"><div class="ch"><canvas id="c3"></canvas></div></div>
 </div>
 <div class="card tw" style="margin-top:12px"><table id="tch"></table></div>
+<h3>Chi tiết từng kênh theo tháng</h3>
+<div class="card tw"><table id="tcm"></table></div>
 
-<h2>Hiệu suất nhân sự</h2>
+<h2 id="ns">Hiệu suất nhân sự</h2>
 <p class="sub">Doanh thu trên mỗi giờ làm. Mục tiêu 1.050.000đ/giờ, chưa ai chạm tới.</p>
 <div class="grid g2">
  <div class="card"><div class="ch"><canvas id="c4"></canvas></div></div>
  <div class="card"><div class="ch"><canvas id="c5"></canvas></div></div>
 </div>
 <div class="card tw" style="margin-top:12px"><table id="tst"></table></div>
+<div class="card" style="margin-top:12px"><div class="ch"><canvas id="c9"></canvas></div></div>
+<h3>Chi tiết từng nhân sự theo tháng (mục tiêu doanh thu: 210,5 tr / 212,5 tr / 219,3 tr mỗi người)</h3>
+<div class="card tw"><table id="tsm"></table></div>
 
 <h2>Nhận định và đề xuất</h2>
 <div class="card ins"><ul>
@@ -117,7 +130,7 @@ tr.tot td{font-weight:600;border-top:2px solid var(--line)}
 <li><b>Giờ làm vượt kế hoạch nhưng hiệu suất thấp.</b> Tổng 2.640 giờ so với 2.380 giờ kế hoạch (+10,9%), nên doanh thu/giờ chỉ còn 719.321đ, giảm 25,9% so với Quý II.</li>
 </ul></div>
 
-<h2>Hỗ trợ phần mềm</h2>
+<h2 id="pm">Hỗ trợ phần mềm</h2>
 <div class="grid g4">
  <div class="card k"><span>Tổng sự cố</span><b>10</b><span>Đã hoàn thành 10/10</span></div>
  <div class="card k" style="border-top:4px solid var(--sa)"><span>CRM Viet &amp; Etelecom</span><b>6</b><span>Định danh nhà mạng, nhạc chờ, gia hạn SSL và phần mềm</span></div>
@@ -169,6 +182,7 @@ const kp=[["Doanh thu quý","1,899 tỷ",`${sg(-37.42)} so với kế hoạch ·
 ["Số đơn","13.340",`${sg(-40.21)} so với kế hoạch (22.312 đơn)`],
 ["Giá trị đơn trung bình","142.354đ",`${sg(4.67)} so với kế hoạch (136.000đ)`],
 ["Doanh thu / giờ làm","719.321đ",`${sg(-31.49)} so với mục tiêu 1.050.000đ`]];
+kp.push(["Giờ làm","2.640 giờ","+10,9% so với kế hoạch (2.380 giờ)"],["Đơn / giờ làm","5,05",`${sg(pc(13340/2640,22312/2380))} so với kế hoạch (9,37)`],["Doanh thu bình quân / ngày","20,6 tr",`${sg(pc(1899.008,3034.444))} so với kế hoạch (33,0 tr)`],["Tỷ trọng Zalo phòng","72,8%","Kế hoạch 60,0% · Quý II 65,3% · Q3.2025 61,1%"]);
 document.getElementById("kpi").innerHTML=kp.map(k=>`<div class="card k"><span>${k[0]}</span><b>${k[1]}</b><span>${k[2]}</span></div>`).join("");
 
 const ch=[
@@ -212,6 +226,23 @@ h=`<tr><th>Nhân sự</th><th>Doanh thu (tr)</th><th>So Quý II</th><th>So Q3.20
 sv.forEach(s=>{h+=`<tr><td>${s[0]}</td><td>${f(Math.round(s[1]))}</td><td>${sg(pc(s[1],s[2]))}</td><td>${sg(pc(s[1],s[3]))}</td><td>${f(s[4])}đ</td><td>${sg(pc(s[4],s[5]))}</td><td>${sg(pc(s[4],s[6]))}</td><td>${sg(pc(s[4],1050000))}</td></tr>`});
 document.getElementById("ts2").innerHTML=h;
 const br=[["So với kế hoạch","p"],["So với Quý II","q"],["So với Q3.2025","y"]].map(([l,k])=>{const o=T.ord,a=T.aov;return[l,(o.a-o[k])*a[k]/1e6,(a.a-a[k])*o.a/1e6,T.rev.a-T.rev[k]]});
+const oo=[5169,4568,3603],hh=[942,905,794],dd=[31,31,30],po=[7371,7353,7588];
+const d1=x=>x.toFixed(1).replace(".",","),d2=x=>x.toFixed(2).replace(".",",");
+const rw=(l,r,o,hr,d,pr,pO,prev)=>`<tr${l=="Cả quý"?' class="tot"':''}><td>${l}</td><td>${f(Math.round(r))}</td><td>${sg(pc(r,pr))}</td><td>${f(o)}</td><td>${sg(pc(o,pO))}</td><td>${f(Math.round(r*1e6/o))}đ</td><td>${f(hr)}</td><td>${f(Math.round(r*1e6/hr))}đ</td><td>${d2(o/hr)}</td><td>${d1(o/d)}</td><td>${d1(r/d)}</td><td>${prev==null?"–":sg(prev)}</td></tr>`;
+h=`<tr><th>Tháng</th><th>Doanh thu (tr)</th><th>So KH</th><th>Số đơn</th><th>So KH</th><th>Giá trị đơn</th><th>Giờ làm</th><th>DT/giờ</th><th>Đơn/giờ</th><th>Đơn/ngày</th><th>DT/ngày (tr)</th><th>DT so tháng trước</th></tr>`;
+mo.forEach((m,i)=>{h+=rw(m,act[i],oo[i],hh[i],dd[i],plan[i],po[i],i?pc(act[i],act[i-1]):null)});
+h+=rw("Cả quý",1899.008,13340,2640,92,3034.444,22312,null);
+document.getElementById("tmo").innerHTML=h;
+const X=[{po:[4423,4412,4553],pr:[601.47,600,619.196],yr:[631.329,621.01,540.905],qr:[569.6735,620.87948,574.9124]},
+{po:[2211,2206,2276],pr:[300.735,300,309.598],yr:[306.64,322.06,263.704],qr:[272.924,263.61773,255.49]},
+{po:[737,735,759],pr:[100.245,100,103.199],yr:[78.429,82.597,89.406],qr:[66.864,39.451,41.792]}];
+h=`<tr><th>Kênh</th><th>Tháng</th><th>Số đơn</th><th>Đơn so KH</th><th>Doanh thu (tr)</th><th>Giá trị đơn</th><th>DT so KH</th><th>DT so Q3.2025</th><th>DT so Quý II</th></tr>`;
+ch.forEach((c,k)=>mo.forEach((m,i)=>{const R=c.r[i],x=X[k];h+=`<tr><td>${i?"":c.n}</td><td>${m}</td><td>${f(c.o[i])}</td><td>${sg(pc(c.o[i],x.po[i]))}</td><td>${f(Math.round(R))}</td><td>${f(Math.round(R*1e6/c.o[i]))}đ</td><td>${sg(pc(R,x.pr[i]))}</td><td>${sg(pc(R,x.yr[i]))}</td><td>${sg(pc(R,x.qr[i]))}</td></tr>`}));
+document.getElementById("tcm").innerHTML=h;
+const tg2=[210.5145,212.5,219.2987];
+h=`<tr><th>Nhân sự</th><th>Tháng</th><th>Doanh thu (tr)</th><th>So mục tiêu</th><th>Số đơn</th><th>Giờ làm</th><th>DT/giờ</th><th>Đơn/giờ</th><th>Giá trị đơn</th></tr>`;
+st.forEach(s=>mo.forEach((m,i)=>{const R=s.r[i],O=s.o[i],H=s.h[i];h+=`<tr><td>${i?"":s.n}</td><td>${m}</td><td>${f(Math.round(R))}</td><td>${sg(pc(R,tg2[i]))}</td><td>${f(O)}</td><td>${f(H)}</td><td>${f(Math.round(R*1e6/H))}đ</td><td>${d2(O/H)}</td><td>${f(Math.round(R*1e6/O))}đ</td></tr>`}));
+document.getElementById("tsm").innerHTML=h;
 let charts=[];
 function draw(){
  charts.forEach(c=>c.destroy());charts=[];
@@ -248,6 +279,9 @@ function draw(){
   {label:"Do giá trị đơn",data:br.map(b=>b[2]),backgroundColor:g("--green")},
   {label:"Tổng chênh lệch",data:br.map(b=>b[3]),backgroundColor:g("--mute")}]},
   options:{...base,scales:sc({y:{beginAtZero:false}}),plugins:{...base.plugins,title:{display:true,text:"Chênh lệch doanh thu: do số đơn hay giá trị đơn (triệu đồng)",color:ink},tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${dl(c.raw)} triệu`}}}}});
+ const c4=[g("--green"),g("--amber"),g("--sa"),g("--red")];
+ mk("c9",{type:"line",data:{labels:mo,datasets:[...st.map((s,i)=>({label:s.n.split(" ").slice(-2).join(" "),data:s.r.map((r,j)=>Math.round(r*1e6/s.h[j])),borderColor:c4[i],backgroundColor:c4[i],tension:.25,pointRadius:4})),{label:"Mục tiêu",data:[1050000,1050000,1050000],borderColor:g("--mute"),borderDash:[6,4],pointRadius:0}]},
+  options:{...base,scales:sc({y:{ticks:{callback:v=>f(v/1000)+"k"}}}),plugins:{...base.plugins,title:{display:true,text:"Doanh thu/giờ từng người theo tháng (đồng)",color:ink}}}});
  mk("c8",{type:"bar",data:{labels:mo,datasets:[
   {label:"CRM Viet & Etelecom",data:[1,3,2],backgroundColor:g("--sa")},
   {label:"SMAX",data:[1,2,1],backgroundColor:g("--sb")}]},
