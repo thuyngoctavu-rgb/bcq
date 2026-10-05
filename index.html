@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Dashboard CSKH Online – Quý III.2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{--bg:#f2f5f1;--card:#fff;--ink:#16211b;--mute:#5c6b62;--line:#dde4de;--green:#2b7a58;--red:#c4403a;--amber:#b5802c;--grey:#a9b4ac;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1713;--card:#17221c;--ink:#e8efe9;--mute:#97a79c;--line:#27362d;--green:#4cb487;--red:#ee6d65;--amber:#dba24e;--grey:#51615680}}
+:root[data-theme="dark"]{--bg:#0f1713;--card:#17221c;--ink:#e8efe9;--mute:#97a79c;--line:#27362d;--green:#4cb487;--red:#ee6d65;--amber:#dba24e;--grey:#51615680}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.5 "Be Vietnam Pro",system-ui,sans-serif}
+.w{max-width:1120px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:22px;margin:0;font-weight:800}
+h2{font-size:17px;margin:34px 0 4px;font-weight:600}
+.sub{color:var(--mute);font-size:13px;margin:0 0 14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+.grid{display:grid;gap:12px}
+.g4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:24px;margin-top:16px;padding:24px;background:var(--ink);color:var(--bg);border-radius:14px}
+@media(max-width:720px){.hero{grid-template-columns:1fr}}
+.big{font-size:68px;font-weight:800;line-height:1;letter-spacing:-2px}
+.hero p{margin:10px 0 0;opacity:.8}
+.m{margin-bottom:14px}.m:last-child{margin-bottom:0}
+.m .t{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}
+.bar{height:12px;background:rgba(255,255,255,.18);border-radius:6px;overflow:hidden}
+.bar i{display:block;height:100%;background:#f0b35a;border-radius:6px}
+.k b{display:block;font-size:26px;font-weight:800;margin:2px 0}
+.k span{font-size:13px;color:var(--mute)}
+.neg{color:var(--red);font-weight:600}.pos{color:var(--green);font-weight:600}
+.ch{position:relative;height:280px}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:560px}
+th,td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{color:var(--mute);font-weight:500}
+tr.tot td{font-weight:600;border-top:2px solid var(--line)}
+.ins li{margin-bottom:8px}
+.ins ul{margin:0;padding-left:18px}
+.tag{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;background:var(--line)}
+.note{font-size:12px;color:var(--mute);margin-top:28px}
+</style>
+</head>
+<body>
+<div class="w">
+<h1>Báo cáo CSKH Online – Quý III.2026</h1>
+<p class="sub">Kênh nhận đơn: Zalo phòng, Fanpage, Hotline · Kỳ báo cáo 01/07 – 30/09/2026</p>
+
+<section class="hero">
+ <div>
+  <div class="big">62,6%</div>
+  <p>Doanh thu 1,899 tỷ so với kế hoạch 3,034 tỷ. Thiếu 1,135 tỷ, và khoảng cách rộng ra theo từng tháng.</p>
+ </div>
+ <div id="months"></div>
+</section>
+
+<div class="grid g4" style="margin-top:12px" id="kpi"></div>
+
+<h2>Doanh thu theo tháng</h2>
+<p class="sub">Triệu đồng. Tháng 9 chỉ đạt một nửa kế hoạch.</p>
+<div class="card"><div class="ch"><canvas id="c1"></canvas></div></div>
+
+<h2>Phân tích chênh lệch</h2>
+<p class="sub">So với kế hoạch, Quý II.2026 và cùng kỳ Quý III.2025. Số âm là thấp hơn mốc so sánh. Tháng Quý II tính theo thứ tự T4, T5, T6 tương ứng T7, T8, T9.</p>
+<div class="card tw"><table id="tv"></table></div>
+<div class="card tw" style="margin-top:12px"><table id="tm"></table></div>
+<div class="grid g2" style="margin-top:12px">
+ <div class="card"><div class="ch"><canvas id="c6"></canvas></div></div>
+ <div class="card"><div class="ch"><canvas id="c7"></canvas></div></div>
+</div>
+<div class="card tw" style="margin-top:12px"><table id="ts2"></table></div>
+<div class="card ins" style="margin-top:12px"><ul>
+<li><b>Chênh lệch so với kế hoạch (−1.135 tr):</b> thiếu đơn làm hụt 1.220 tr, giá trị đơn cao hơn kế hoạch bù lại 85 tr.</li>
+<li><b>So với Quý II (−807 tr):</b> số đơn giảm 26,7% làm hụt 722 tr, giá trị đơn giảm 4,3% làm hụt thêm 84 tr. Đây là quý đầu tiên giá trị đơn cũng đi xuống.</li>
+<li><b>So với cùng kỳ (−1.037 tr):</b> số đơn giảm 39,6% làm hụt 1.164 tr, giá trị đơn tăng 7,2% bù lại 127 tr.</li>
+<li><b>Khoảng cách rộng ra mỗi tháng:</b> so với kế hoạch từ −27,4% (T7) xuống −49,4% (T9), so với Quý II từ −20,0% xuống −40,1%, so với cùng kỳ từ −28,4% xuống −41,6%.</li>
+<li><b>Nhân sự:</b> Tài Châu Thúy Ngọc giữ hiệu suất tốt nhất (doanh thu/giờ giảm 20,0% so với Quý II). Hà Văn Thái và Nguyễn Huỳnh Lan Anh giảm gần 30%.</li>
+</ul></div>
+
+<h2>Theo kênh nhận đơn</h2>
+<p class="sub">Số đơn từng tháng và đóng góp doanh thu của mỗi kênh.</p>
+<div class="grid g2">
+ <div class="card"><div class="ch"><canvas id="c2"></canvas></div></div>
+ <div class="card"><div class="ch"><canvas id="c3"></canvas></div></div>
+</div>
+<div class="card tw" style="margin-top:12px"><table id="tch"></table></div>
+
+<h2>Hiệu suất nhân sự</h2>
+<p class="sub">Doanh thu trên mỗi giờ làm. Mục tiêu 1.050.000đ/giờ, chưa ai chạm tới.</p>
+<div class="grid g2">
+ <div class="card"><div class="ch"><canvas id="c4"></canvas></div></div>
+ <div class="card"><div class="ch"><canvas id="c5"></canvas></div></div>
+</div>
+<div class="card tw" style="margin-top:12px"><table id="tst"></table></div>
+
+<h2>Nhận định và đề xuất</h2>
+<div class="card ins"><ul>
+<li><b>Vấn đề là số lượng đơn, không phải giá trị đơn.</b> Giá trị trung bình tăng từ 140.744đ (T7) lên 144.978đ (T9) và vượt kế hoạch 4,7%, trong khi số đơn giảm 30,3% (5.169 → 3.603).</li>
+<li><b>Fanpage và Hotline giảm sâu nhất.</b> Fanpage còn 876 đơn ở T9 (T7: 1.451), thấp hơn kế hoạch 53,3% cả quý. Hotline thấp hơn kế hoạch 70,0%. Zalo phòng giữ được 72,8% doanh thu quý.</li>
+<li><b>Giờ làm vượt kế hoạch nhưng hiệu suất thấp.</b> Tổng 2.640 giờ so với 2.380 giờ kế hoạch (+10,9%), nên doanh thu/giờ chỉ còn 719.321đ, giảm 25,9% so với Quý II.</li>
+<li><b>Chênh lệch giữa các nhân sự lớn.</b> Tài Châu Thúy Ngọc đạt 846.565đ/giờ, Hà Văn Thái đạt 606.161đ/giờ (T9: 482.543đ/giờ). Nên rà lại ca làm và kịch bản tư vấn của nhóm thấp.</li>
+<li><b>Việc nên làm ngay:</b> (1) kiểm tra nguồn khách Fanpage và Hotline T9; (2) chạy chương trình kéo khách quay lại cho Zalo; (3) đặt mục tiêu doanh thu/giờ theo từng người cho Quý IV; (4) gắn giờ làm với lượng đơn dự kiến theo khung giờ.</li>
+</ul></div>
+
+<h2>Hỗ trợ phần mềm</h2>
+<div class="grid g4">
+ <div class="card k"><span>Tổng sự cố</span><b>10</b><span>Đã hoàn thành 10/10</span></div>
+ <div class="card k"><span>CRM Viet &amp; Etelecom</span><b>6</b><span>Định danh nhà mạng, nhạc chờ, gia hạn SSL và phần mềm</span></div>
+ <div class="card k"><span>SMAX</span><b>4</b><span>Tin nhắn đổ về chậm (2 lần), lỗi phần mềm, gia hạn</span></div>
+ <div class="card k"><span>CSKH + Autochannel</span><b>283 tr</b><span>Bằng 46,3% mục tiêu 611 tr. Tổng cả hai nhóm: 2,182 tỷ (59,9% kế hoạch)</span></div>
+</div>
+
+<p class="note">Nguồn: file “Báo cáo kết quả doanh thu và giờ làm việc 2026 – Quý III”. So sánh cùng kỳ năm trước dùng số liệu theo kênh (2,936 tỷ). Mục 1 của file gốc ghi Quý III.2025 là 3,282 tỷ nên tăng trưởng cùng kỳ ở đó là −42,1%, còn dashboard này là −35,3%. Nên đối chiếu lại số gốc. Quý III.2025 có 5 nhân sự (một người nghỉ), nên so doanh thu/giờ công bằng hơn so doanh thu từng người. Bảng nhân sự Quý II trong file gốc ghi nhãn tháng chưa thống nhất, dashboard dùng tổng quý.</p>
+</div>
+
+<script>
+const f=n=>n.toLocaleString("vi-VN"), tr=n=>f(Math.round(n/1e6)), pc=(a,b)=>((a/b-1)*100);
+const sg=v=>`<span class="${v<0?'neg':'pos'}">${v>0?'+':''}${v.toFixed(1).replace('.',',')}%</span>`;
+const mo=["Tháng 7","Tháng 8","Tháng 9"];
+const act=[727.501,649.152,522.355], plan=[1002.45,1000,1031.994], y25=[1016.398,1025.667,894.015];
+document.getElementById("months").innerHTML=mo.map((m,i)=>`<div class="m"><div class="t"><span>${m}: ${f(Math.round(act[i]))} / ${f(Math.round(plan[i]))} triệu</span><b>${(act[i]/plan[i]*100).toFixed(1).replace('.',',')}%</b></div><div class="bar"><i style="width:${act[i]/plan[i]*100}%"></i></div></div>`).join("");
+const kp=[["Doanh thu quý","1,899 tỷ",`${sg(-37.42)} so với kế hoạch · ${sg(-35.32)} cùng kỳ 2025`],
+["Số đơn","13.340",`${sg(-40.21)} so với kế hoạch (22.312 đơn)`],
+["Giá trị đơn trung bình","142.354đ",`${sg(4.67)} so với kế hoạch (136.000đ)`],
+["Doanh thu / giờ làm","719.321đ",`${sg(-31.49)} so với mục tiêu 1.050.000đ`]];
+document.getElementById("kpi").innerHTML=kp.map(k=>`<div class="card k"><span>${k[0]}</span><b>${k[1]}</b><span>${k[2]}</span></div>`).join("");
+
+const ch=[
+{n:"Zalo phòng",o:[3421,2947,2491],r:[521.743,464.656,396.368],p:1820.666,y:1793.244,q2:1765.465,ao:156086},
+{n:"Fanpage",o:[1451,1323,876],r:[172.362,153.257,99.699],p:910.333,y:892.404,q2:792.032,ao:116525},
+{n:"Hotline",o:[297,298,236],r:[33.396,31.239,26.288],p:303.444,y:250.432,q2:148.107,ao:109414}];
+const sum=a=>a.reduce((x,y)=>x+y,0);
+let h=`<tr><th>Kênh</th><th>Số đơn</th><th>Doanh thu (tr)</th><th>Tỷ trọng</th><th>Giá trị TB</th><th>So kế hoạch</th><th>So Q3.2025</th><th>So Q2.2026</th></tr>`;
+ch.forEach(c=>{const R=sum(c.r);h+=`<tr><td>${c.n}</td><td>${f(sum(c.o))}</td><td>${f(Math.round(R))}</td><td>${(R/1899.008*100).toFixed(1).replace('.',',')}%</td><td>${f(c.ao)}đ</td><td>${sg(pc(R,c.p))}</td><td>${sg(pc(R,c.y))}</td><td>${sg(pc(R,c.q2))}</td></tr>`});
+h+=`<tr class="tot"><td>Tổng</td><td>13.340</td><td>1.899</td><td>100%</td><td>142.354đ</td><td>${sg(-37.42)}</td><td>${sg(-35.32)}</td><td>${sg(pc(1899.008,2705.604))}</td></tr>`;
+document.getElementById("tch").innerHTML=h;
+
+const st=[
+{n:"Hà Văn Thái",r:[141.406,167.978,97.956],o:[1095,1112,765],h:[225,244,203],ph:606161},
+{n:"Tài Châu Thúy Ngọc",r:[225.923,188.051,165.923],o:[1541,1320,1097],h:[254,235,196],ph:846565},
+{n:"Nguyễn Ngọc Trinh",r:[201.039,162.743,132.980],o:[1411,1174,841],h:[232.5,228,192],ph:761321},
+{n:"Nguyễn Huỳnh Lan Anh",r:[159.133,130.380,125.496],o:[1122,962,900],h:[230,198,202.5],ph:658222}];
+h=`<tr><th>Nhân sự</th><th>Doanh thu (tr)</th><th>Tỷ trọng</th><th>Số đơn</th><th>Giờ làm</th><th>Đơn/giờ</th><th>Doanh thu/giờ</th><th>So mục tiêu giờ</th><th>So mục tiêu doanh thu</th></tr>`;
+st.forEach(s=>{const R=sum(s.r),O=sum(s.o),H=sum(s.h);h+=`<tr><td>${s.n}</td><td>${f(Math.round(R))}</td><td>${(R/1899.008*100).toFixed(1).replace('.',',')}%</td><td>${f(O)}</td><td>${f(H)}</td><td>${(O/H).toFixed(1).replace('.',',')}</td><td>${f(s.ph)}đ</td><td>${sg(pc(s.ph,1050000))}</td><td>${sg(pc(R,642.313))}</td></tr>`});
+h+=`<tr class="tot"><td>Toàn đội</td><td>1.899</td><td>100%</td><td>13.340</td><td>2.640</td><td>5,1</td><td>719.321đ</td><td>${sg(-31.49)}</td><td>${sg(-37.42)}</td></tr>`;
+document.getElementById("tst").innerHTML=h;
+
+const T={rev:{a:1899.008,p:3034.444,q:2705.604,y:2936.08},ord:{a:13340,p:22312,q:18198,y:22103},aov:{a:142354,p:136000,q:148676,y:132836},hr:{a:2640,p:2380,q:2788,y:2844},rph:{a:719321,p:1050000,q:970446,y:1032558}};
+const dl=v=>(v>0?"+":"")+f(Math.round(v));
+const pl=x=>(x>0?"+":"")+x.toFixed(1).replace(".",",")+"%";
+const cell=(a,b,nc)=>`<td>${f(Math.round(b))}</td><td>${dl(a-b)}</td><td>${nc?pl(pc(a,b)):sg(pc(a,b))}</td>`;
+h=`<tr><th>Chỉ tiêu</th><th>Q3.2026</th><th>Kế hoạch</th><th>Chênh</th><th>%</th><th>Quý II.2026</th><th>Chênh</th><th>%</th><th>Q3.2025</th><th>Chênh</th><th>%</th></tr>`;
+[["Doanh thu (triệu đồng)","rev"],["Số đơn","ord"],["Giá trị đơn TB (đồng)","aov"],["Giờ làm","hr",1],["Doanh thu/giờ (đồng)","rph"]].forEach(([l,k,nc])=>{const t=T[k];h+=`<tr><td>${l}</td><td>${f(Math.round(t.a))}</td>${cell(t.a,t.p,nc)}${cell(t.a,t.q,nc)}${cell(t.a,t.y,nc)}</tr>`});
+document.getElementById("tv").innerHTML=h;
+const q2=[909.4615,923.948,872.194];
+const mr=mo.map((m,i)=>[m,act[i],plan[i],q2[i],y25[i]]);mr.push(["Cả quý",sum(act),sum(plan),sum(q2),sum(y25)]);
+h=`<tr><th>Doanh thu (triệu)</th><th>Thực tế</th><th>Kế hoạch</th><th>Chênh</th><th>%</th><th>Quý II</th><th>Chênh</th><th>%</th><th>Q3.2025</th><th>Chênh</th><th>%</th></tr>`;
+mr.forEach(r=>{h+=`<tr class="${r[0]=="Cả quý"?"tot":""}"><td>${r[0]}</td><td>${f(Math.round(r[1]))}</td>${cell(r[1],r[2])}${cell(r[1],r[3])}${cell(r[1],r[4])}</tr>`});
+document.getElementById("tm").innerHTML=h;
+const sv=[["Hà Văn Thái",407.34,576.124,600.877,606161,852886,973869],["Tài Châu Thúy Ngọc",579.897,818.441,735.599,846565,1058101,1172269],["Nguyễn Ngọc Trinh",496.762,688.675,609.998,761321,1024814,1048107],["Nguyễn Huỳnh Lan Anh",415.009,622.364,598.991,658222,933079,1012664]];
+h=`<tr><th>Nhân sự</th><th>Doanh thu (tr)</th><th>So Quý II</th><th>So Q3.2025</th><th>Doanh thu/giờ</th><th>So Quý II</th><th>So Q3.2025</th><th>So mục tiêu</th></tr>`;
+sv.forEach(s=>{h+=`<tr><td>${s[0]}</td><td>${f(Math.round(s[1]))}</td><td>${sg(pc(s[1],s[2]))}</td><td>${sg(pc(s[1],s[3]))}</td><td>${f(s[4])}đ</td><td>${sg(pc(s[4],s[5]))}</td><td>${sg(pc(s[4],s[6]))}</td><td>${sg(pc(s[4],1050000))}</td></tr>`});
+document.getElementById("ts2").innerHTML=h;
+const br=[["So với kế hoạch","p"],["So với Quý II","q"],["So với Q3.2025","y"]].map(([l,k])=>{const o=T.ord,a=T.aov;return[l,(o.a-o[k])*a[k]/1e6,(a.a-a[k])*o.a/1e6,T.rev.a-T.rev[k]]});
+let charts=[];
+function draw(){
+ charts.forEach(c=>c.destroy());charts=[];
+ const cs=getComputedStyle(document.documentElement),g=n=>cs.getPropertyValue(n).trim();
+ const ink=g("--ink"),mu=g("--mute"),ln=g("--line");
+ Chart.defaults.font.family='"Be Vietnam Pro",system-ui,sans-serif';Chart.defaults.color=mu;
+ const sc=(extra={})=>({x:{grid:{display:false},...(extra.x||{})},y:{grid:{color:ln},beginAtZero:true,...(extra.y||{})}});
+ const base={responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom",labels:{boxWidth:12}}}};
+ const mk=(id,cfg)=>charts.push(new Chart(document.getElementById(id),cfg));
+ mk("c1",{type:"bar",data:{labels:mo,datasets:[
+  {label:"Thực tế",data:act,backgroundColor:g("--green")},
+  {label:"Kế hoạch",data:plan,backgroundColor:g("--amber")},
+  {label:"Cùng kỳ 2025",data:y25,backgroundColor:g("--grey")}]},
+  options:{...base,scales:sc(),plugins:{...base.plugins,tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${f(Math.round(c.raw))} triệu`}}}}});
+ const cc=[g("--green"),g("--amber"),g("--red")];
+ mk("c2",{type:"line",data:{labels:mo,datasets:ch.map((c,i)=>({label:c.n,data:c.o,borderColor:cc[i],backgroundColor:cc[i],tension:.25,pointRadius:4}))},
+  options:{...base,scales:sc(),plugins:{...base.plugins,title:{display:true,text:"Số đơn theo tháng",color:ink}}}});
+ mk("c3",{type:"bar",data:{labels:ch.map(c=>c.n),datasets:[
+  {label:"Thực tế",data:ch.map(c=>sum(c.r)),backgroundColor:g("--green")},
+  {label:"Kế hoạch",data:ch.map(c=>c.p),backgroundColor:g("--amber")},
+  {label:"Q3.2025",data:ch.map(c=>c.y),backgroundColor:g("--grey")}]},
+  options:{...base,scales:sc(),plugins:{...base.plugins,title:{display:true,text:"Doanh thu quý theo kênh (triệu đồng)",color:ink}}}});
+ mk("c4",{type:"bar",data:{labels:st.map(s=>s.n.split(" ").slice(-2).join(" ")),datasets:[
+  {label:"Doanh thu/giờ Q3.2026",data:st.map(s=>s.ph),backgroundColor:g("--green")},
+  {label:"Mục tiêu",data:st.map(()=>1050000),type:"line",borderColor:g("--red"),borderDash:[6,4],pointRadius:0}]},
+  options:{...base,scales:sc({y:{ticks:{callback:v=>f(v/1000)+"k"}}}),plugins:{...base.plugins,title:{display:true,text:"Doanh thu trên giờ làm (đồng)",color:ink}}}});
+ mk("c5",{type:"bar",data:{labels:mo,datasets:st.map((s,i)=>({label:s.n.split(" ").slice(-2).join(" "),data:s.r,backgroundColor:[g("--green"),g("--amber"),g("--grey"),g("--red")][i]}))},
+  options:{...base,scales:sc(),plugins:{...base.plugins,title:{display:true,text:"Doanh thu từng người theo tháng (triệu đồng)",color:ink}}}});
+ const lb=[...mo,"Cả quý"],ref=[["So với kế hoạch",2,"--amber"],["So với Quý II",3,"--green"],["So với Q3.2025",4,"--mute"]];
+ mk("c6",{type:"bar",data:{labels:lb,datasets:ref.map(([l,j,c])=>({label:l,data:mr.map(r=>pc(r[1],r[j])),backgroundColor:g(c)}))},
+  options:{...base,scales:{x:{grid:{display:false}},y:{grid:{color:ln},max:0,ticks:{callback:v=>v+"%"}}},plugins:{...base.plugins,title:{display:true,text:"Doanh thu lệch so với mốc so sánh (%)",color:ink},tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${pl(c.raw)}`}}}}});
+ mk("c7",{type:"bar",data:{labels:br.map(b=>b[0]),datasets:[
+  {label:"Do số đơn",data:br.map(b=>b[1]),backgroundColor:g("--red")},
+  {label:"Do giá trị đơn",data:br.map(b=>b[2]),backgroundColor:g("--green")},
+  {label:"Tổng chênh lệch",data:br.map(b=>b[3]),backgroundColor:g("--mute")}]},
+  options:{...base,scales:sc({y:{beginAtZero:false}}),plugins:{...base.plugins,title:{display:true,text:"Chênh lệch doanh thu: do số đơn hay giá trị đơn (triệu đồng)",color:ink},tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${dl(c.raw)} triệu`}}}}});
+}
+draw();
+matchMedia("(prefers-color-scheme:dark)").addEventListener("change",draw);
+</script>
+</body>
+</html>
